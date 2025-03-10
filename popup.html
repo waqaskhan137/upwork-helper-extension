@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upwork Helper Extension</title>
+  <style>
+    body {
+      width: 300px;
+      height: 300px;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+    }
+    h1 {
+      font-size: 18px;
+      color: #333;
+    }
+    p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .note {
+      font-size: 12px;
+      color: #888;
+      font-style: italic;
+      margin-top: 15px;
+    }
+    button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    #status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+      font-size: 12px;
+      max-height: 100px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Upwork Helper Extension</h1>
+  <p>This extension helps you interact with Upwork pages. Navigate to an Upwork page and click the button below to run the extension.</p>
+  <button id="actionButton">Run on Upwork Page</button>
+  <div id="status">Status: Ready</div>
+  <p class="note">Note: This extension only works on Upwork sites (*.upwork.com).</p>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 
