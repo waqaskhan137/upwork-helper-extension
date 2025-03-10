@@ -1,0 +1,41 @@
+name: Release Management
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Create Extension Package
+      run: |
+        mkdir -p dist
+        cp -r manifest.json background.js content.js popup.html popup.js images lib results.* dist/
+        cd dist && zip -r ../extension.zip *
+    
+    - name: Generate changelog
+      id: changelog
+      uses: metcalfc/changelog-generator@v4.0.1
+      with:
+        myToken: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./extension.zip
+        asset_name: upwork-helper-extension.zip
+        asset_content_type: application/zip
+    
+    - name: Update Release Notes
+      uses: softprops/action-gh-release@v1
+      with:
+        body: ${{ steps.changelog.outputs.changelog }}
+        files: extension.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
